@@ -266,7 +266,11 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.axis('off')
 plt.show()
 
-!pip install NRCLex==3.0.0
+import subprocess
+import sys
+
+# Install NRCLex
+subprocess.check_call([sys.executable, "-m", "pip", "install", "NRCLex==3.0.0"])
 
 from nrclex import NRCLex
 
