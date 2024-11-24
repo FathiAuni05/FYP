@@ -12,7 +12,11 @@ nltk.download('vader_lexicon')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-! unzip /usr/share/nltk_data/corpora/wordnet.zip -d /usr/share/nltk_data/corpora/
+import subprocess
+
+# Unzipping the file
+subprocess.run(["unzip", "/usr/share/nltk_data/corpora/wordnet.zip", "-d", "/usr/share/nltk_data/corpora/"], check=True)
+
 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import word_tokenize
