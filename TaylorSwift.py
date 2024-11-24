@@ -7,6 +7,8 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "wordcloud", "pan
 
 pip install wordcloud pandas matplotlib
 
+pip install -r requirements.txt
+
 import nltk
 
 # Download necessary NLTK resources
