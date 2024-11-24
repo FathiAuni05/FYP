@@ -5,8 +5,6 @@ import sys
 # Install required packages
 subprocess.check_call([sys.executable, "-m", "pip", "install", "wordcloud", "pandas", "matplotlib"])
 
-pip install wordcloud pandas matplotlib
-
 pip install -r requirements.txt
 
 import nltk
