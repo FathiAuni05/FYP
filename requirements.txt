@@ -2,5 +2,3 @@ matplotlib
 seaborn
 wordcloud
 pandas
-
-pip install -r requirements.txt
