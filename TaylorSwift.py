@@ -1,9 +1,11 @@
 import streamlit as st
 import subprocess
+import sys
 
-# Install necessary libraries
-subprocess.check_call(["pip", "install", "wordcloud", "pandas", "matplotlib"])
-wordcloud pandas matplotlib
+# Install required packages
+subprocess.check_call([sys.executable, "-m", "pip", "install", "wordcloud", "pandas", "matplotlib"])
+
+pip install wordcloud pandas matplotlib
 
 import nltk
 
