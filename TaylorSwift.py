@@ -3,7 +3,7 @@ import subprocess
 
 # Install necessary libraries
 subprocess.check_call(["pip", "install", "wordcloud", "pandas", "matplotlib"])
-pip install wordcloud pandas matplotlib
+wordcloud pandas matplotlib
 
 import nltk
 
