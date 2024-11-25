@@ -15,7 +15,6 @@ nltk.download('wordnet')
 import subprocess
 
 # Unzipping the file
-subprocess.run(["unzip", "/usr/share/nltk_data/corpora/wordnet.zip", "-d", "/usr/share/nltk_data/corpora/"], check=True)
 
 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
