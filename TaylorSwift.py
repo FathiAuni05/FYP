@@ -35,6 +35,10 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
+st.set_page_config(
+    page_title="Genetic Algorithm"
+)
+
 st.header("Exploratory Data Analysis (EDA)", divider="gray")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
