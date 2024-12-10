@@ -1,28 +1,3 @@
-import streamlit as st
-import subprocess
-import sys
-
-# Install required packages
-subprocess.check_call([sys.executable, "-m", "pip", "install", "wordcloud", "pandas", "matplotlib"])
-
-import nltk
-
-# Download necessary NLTK resources
-nltk.download('vader_lexicon')
-nltk.download('stopwords')
-nltk.download('wordnet')
-
-import subprocess
-
-# Unzipping the file
-
-
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords, wordnet, words
-
-wordnet.synsets('na')
-
 # Import Libraries
 import requests
 import os
@@ -30,6 +5,17 @@ from wordcloud import WordCloud
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
+import subprocess
+import sys
+import nltk
+import string
+from nltk.corpus import stopwords, words, wordnet
+from nltk.tokenize import word_tokenize
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nrclex import NRCLex
+
+wordnet.synsets('na')
 
 # URL of the font file
 # Added 'https://' to the URL
@@ -49,10 +35,6 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
-import nltk
-import string
-from nltk.corpus import stopwords, words, wordnet
-from nltk.tokenize import word_tokenize
 
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
@@ -75,8 +57,8 @@ filtered_tokens = [word.lower() for word in tokens
 # Join tokens into a single string
 text_for_wordcloud = ' '.join(filtered_tokens)
 
-print(len(filtered_tokens))
-print(filtered_tokens[:100])
+st.write(len(filtered_tokens))
+st.write(filtered_tokens[:100])
 
 # Create a pandas Series from the list 📑
 word_series = pd.Series(filtered_tokens)
@@ -106,7 +88,7 @@ plt.xticks(rotation=45, ha='right', fontsize=12)
 plt.yticks(fontsize=12)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
-plt.show()
+st.pyplot(plt.gcf())
 
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
@@ -130,7 +112,7 @@ wordcloud.generate(text_for_wordcloud)
 plt.figure(figsize=(12, 6))
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
-plt.show()
+st.pyplot(plt.gcf())
 
 # Initialize the SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
@@ -156,7 +138,7 @@ plt.figure(figsize=(8, 6))
 plt.pie(sizes, labels=labels, colors=plt.cm.Set2.colors, autopct='%1.1f%%', startangle=140)
 plt.title('Sentiment Distribution')
 plt.axis('equal')
-plt.show()
+st.pyplot(plt.gcf())
 
 # Initialize list to store word sentiments
 word_sentiments = []
@@ -193,16 +175,16 @@ average_neutral_score = neutral_score_sum / neutral_count if neutral_count != 0 
 average_total_score = (positive_score_sum + negative_score_sum + neutral_score_sum) / total_words
 
 # Print results
-print("pos:", positive_count)
-print("neg:", negative_count)
-print("neu:", neutral_count)
-print("Total:", total_words)
+st.write("pos:", positive_count)
+st.write("neg:", negative_count)
+st.write("neu:", neutral_count)
+st.write("Total:", total_words)
 
 # Print results with two decimal places
-print("Average pos Score: {:.2f}".format(average_positive_score))
-print("Average neg Score: {:.2f}".format(average_negative_score))
-print("Average neu Score: {:.2f}".format(average_neutral_score))
-print("Average Total Score: {:.2f}".format(average_total_score))
+st.write("Average pos Score: {:.2f}".format(average_positive_score))
+st.write("Average neg Score: {:.2f}".format(average_negative_score))
+st.write("Average neu Score: {:.2f}".format(average_neutral_score))
+st.write("Average Total Score: {:.2f}".format(average_total_score))
 
 # Create separate lists for each word type
 all_words = [word for sentiment, word in word_sentiments]
@@ -235,7 +217,7 @@ df.columns = ["Word", "Count", "Pos Words", "Pos Counts", "Neg Words", "Neg Coun
 
 # Display the DataFrame with styled background gradients
 styled_df = df.head(30).style.background_gradient(cmap='YlGn')
-styled_df
+st.write(styled_df)
 
 # Generate word clouds for each sentiment type
 wordclouds = {}
@@ -263,15 +245,11 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.imshow(wordclouds[sentiment_type], interpolation='bilinear')
         plt.title(sentiment_type + ' Words')
         plt.axis('off')
-plt.show()
+st.pyplot(plt.gcf())
 
-import subprocess
-import sys
 
-# Install NRCLex
-subprocess.check_call([sys.executable, "-m", "pip", "install", "NRCLex==3.0.0"])
 
-from nrclex import NRCLex
+
 
 text_object = NRCLex(' '.join(filtered_tokens))
 text_object.affect_frequencies
@@ -280,7 +258,7 @@ text_object.top_emotions
 
 # Get the total number of words
 total_words = len(text_object.words)
-print("Total words in the text:", total_words)
+st.write("Total words in the text:", total_words)
 
 sentiment_scores = pd.DataFrame(list(text_object.raw_emotion_scores.items()))
 sentiment_scores = sentiment_scores.rename(columns={0: "Sentiment", 1: "Count"})
@@ -291,7 +269,7 @@ plt.figure(figsize=(8, 6))
 plt.pie(sentiment_scores['Count'], labels=sentiment_scores['Sentiment'], colors=plt.cm.tab20c.colors, autopct='%1.1f%%', startangle=140)
 plt.title('Sentiment Distribution')
 plt.axis('equal')
-plt.show()
+st.pyplot(plt.gcf())
 
 from collections import Counter
 
@@ -343,7 +321,7 @@ for j in range(len(unique_sentiments), num_rows * num_cols):
     axs[j].axis('off')
 
 plt.tight_layout()
-plt.show()
+st.pyplot(plt.gcf())
 
 # Determine the number of rows and columns needed
 num_rows = len(unique_sentiments) // 3 + (1 if len(unique_sentiments) % 3 != 0 else 0)
@@ -394,4 +372,4 @@ for j in range(len(unique_sentiments), num_rows * num_cols):
 
 # Adjust layout
 plt.tight_layout()
-plt.show()
+st.pyplot(plt.gcf())
