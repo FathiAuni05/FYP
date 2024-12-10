@@ -35,8 +35,8 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
-import streamlit as st
-st.header("Exploratory Data Analysis (EDA)", divider="gray")
+
+st.title("Exploratory Data Analysis (EDA)")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
