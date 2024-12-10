@@ -35,12 +35,11 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
-
-st.title("Exploratory Data Analysis (EDA)")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
 
+st.header("Exploratory Data Analysis (EDA)", divider="gray")
 english_words = set(words.words())
 
 # Preprocess Data
