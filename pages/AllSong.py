@@ -29,7 +29,7 @@ response = requests.get(font_url)
 with open(font_path, 'wb') as f:
     f.write(response.content)
 
-text_path = "taylor_swift_lyrics.csv"
+text_path = "music_lyrics.csv"
 # Specify encoding explicitly
 df = pd.read_csv(text_path, encoding='latin1')
 
