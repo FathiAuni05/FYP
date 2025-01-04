@@ -43,6 +43,7 @@ else:
     st.info("Please upload a file or paste lyrics to process.")
 
 
+
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
@@ -64,6 +65,29 @@ text_for_wordcloud = ' '.join(filtered_tokens)
 
 st.write(len(filtered_tokens))
 st.write(filtered_tokens[:100])
+
+import pandas as pd
+from nltk.tokenize import word_tokenize
+
+# Example DataFrame creation (replace this with your actual DataFrame creation process)
+# Assuming lyrics are stored in a column named 'Lyrics Line'
+data = ["This is line one", "This is line two", "This is line three"]
+df = pd.DataFrame(data, columns=["Lyrics Line"])
+
+# Ensure the column name is consistent
+if "Lyrics Line" in df.columns:
+    df.rename(columns={"Lyrics Line": "lyrics"}, inplace=True)
+
+# Check DataFrame structure
+print("DataFrame structure:")
+print(df.head())
+
+# Tokenization process
+try:
+    tokens = word_tokenize(" ".join(df['lyrics'].astype(str)))  # Ensure the column exists and is a string
+    print("Tokens:", tokens)
+except KeyError:
+    print("Error: 'lyrics' column not found in DataFrame.")
 
 
 st.subheader("Generate Word Cloud")
