@@ -67,30 +67,31 @@ st.write(len(filtered_tokens))
 st.write(filtered_tokens[:100])
 
 
-
-# Example: Creating a sample DataFrame
+# Example DataFrame creation (replace with your actual data source)
 data = ["This is line one", "This is line two", "This is line three"]
 df = pd.DataFrame(data, columns=["Lyrics Line"])
 
-# Check DataFrame structure
-st.write("Columns in DataFrame:", df.columns.tolist())
+# Debugging: Inspect DataFrame structure
+print("Columns in DataFrame:", df.columns.tolist())
+print("DataFrame Preview:")
+print(df.head())
 
-# Rename column to 'lyrics' for consistency
+# Rename column if necessary
 if "Lyrics Line" in df.columns:
-    df.rename(columns={"Lyrics Line": "lyrics"}, inplace=True)
+    df.rename(columns={"Lyrics Line": "Lyrics"}, inplace=True)
 
-# Check for missing or empty data
-if "lyrics" not in df.columns:
-    st.write("Error: The 'lyrics' column is missing.")
+# Check if the column exists
+if "Lyrics" not in df.columns:
+    print("Error: The 'Lyrics' column is missing.")
 elif df.empty:
-    st.write("Error: The DataFrame is empty!")
+    print("Error: The DataFrame is empty!")
 else:
-    # Tokenization
+    # Tokenize the lyrics
     try:
-        tokens = word_tokenize(" ".join(df['lyrics'].astype(str)))
-        st.write("Tokens:", tokens)
+        tokens = word_tokenize(" ".join(df['Lyrics'].astype(str)))
+        print("Tokens:", tokens)
     except Exception as e:
-        st.write("An error occurred during tokenization:", str(e))
+        print("An error occurred during tokenization:", str(e))
 
 
 st.subheader("Generate Word Cloud")
