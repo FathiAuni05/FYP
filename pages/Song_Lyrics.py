@@ -1,6 +1,9 @@
 import streamlit as st
+import nltk
+import string
 from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords, words, wordnet
 
 # Streamlit App
 st.title("Song Lyrics Uploader")
@@ -31,16 +34,10 @@ elif upload_option == "Paste Text":
             f.write(lyrics)
         st.success("Lyrics saved for further analysis!")
 
-import nltk
-import string
-from nltk.corpus import stopwords, words, wordnet
-from nltk.tokenize import word_tokenize
 
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
-
-english_words = set(words.words())
 
 # Preprocess Data
 tokens = word_tokenize(" ".join(df['lyrics'].astype(str))) # Convert the column to string type
@@ -57,8 +54,8 @@ filtered_tokens = [word.lower() for word in tokens
 # Join tokens into a single string
 text_for_wordcloud = ' '.join(filtered_tokens)
 
-print(len(filtered_tokens))
-print(filtered_tokens[:100])
+st.write(len(filtered_tokens))
+st.write(filtered_tokens[:100])
 
 
 st.subheader("Generate Word Cloud")
@@ -84,7 +81,7 @@ wordcloud.generate(text_for_wordcloud)
 plt.figure(figsize=(12, 6))
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
-plt.show()
+st.pyplot(plt.gcf())
 
 st.subheader("Generate Word Cloud: Pie Chart")
 # Create labels for the pie chart
@@ -98,7 +95,7 @@ plt.figure(figsize=(8, 6))
 plt.pie(sizes, labels=labels, colors=plt.cm.Set2.colors, autopct='%1.1f%%', startangle=140)
 plt.title('Sentiment Distribution')
 plt.axis('equal')
-plt.show()
+st.pyplot(plt.gcf())
 
 st.subheader("Generate Word Cloud: Sentiment Type")
 # Generate word clouds for each sentiment type
@@ -127,4 +124,4 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.imshow(wordclouds[sentiment_type], interpolation='bilinear')
         plt.title(sentiment_type + ' Words')
         plt.axis('off')
-plt.show()
+st.pyplot(plt.gcf())
