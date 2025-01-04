@@ -1,41 +1,55 @@
 import streamlit as st
 import nltk
 import string
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, words, wordnet
 
-# Streamlit App
-st.title("Song Lyrics Uploader")
+# Title of the app
+st.title("Lyric Upload and Line Extraction")
 
-# Sidebar for Navigation
-st.sidebar.header("Options")
-upload_option = st.sidebar.radio("Upload Option", ["Upload a File", "Paste Text"])
+# Instructions
+st.write("Upload a `.txt` file containing song lyrics or paste lyrics below.")
 
-if upload_option == "Upload a File":
-    uploaded_file = st.file_uploader("Choose a text file containing song lyrics", type=["txt"])
-    if uploaded_file:
-        # Read the file
-        lyrics = uploaded_file.read().decode("utf-8")
-        st.subheader("Uploaded Lyrics:")
-        st.text_area("Lyrics Content", lyrics, height=300)
-        
-        # Save the lyrics for further processing
-        with open("uploaded_lyrics.txt", "w") as f:
-            f.write(lyrics)
-        st.success("Lyrics saved for further analysis!")
+# File uploader
+uploaded_file = st.file_uploader("Upload a .txt file", type="txt")
 
-elif upload_option == "Paste Text":
-    st.subheader("Paste Song Lyrics Below:")
-    lyrics = st.text_area("Lyrics Content", height=300)
-    if st.button("Save Lyrics"):
-        # Save the lyrics for further processing
-        with open("pasted_lyrics.txt", "w") as f:
-            f.write(lyrics)
-        st.success("Lyrics saved for further analysis!")
+# Text area for pasting lyrics
+lyrics_input = st.text_area("Or paste the lyrics here:")
+
+# Function to process lyrics
+def process_lyrics(lyrics):
+    lines = [line.strip() for line in lyrics.splitlines() if line.strip()]
+    df = pd.DataFrame(lines, columns=["Lyric Lines"])
+    return df
+
+# Initialize DataFrame
+lyrics_df = None
+
+# Handle uploaded file
+if uploaded_file:
+    lyrics_content = uploaded_file.read().decode("utf-8")
+    lyrics_df = process_lyrics(lyrics_content)
+
+# Handle pasted lyrics
+if lyrics_input:
+    lyrics_df = process_lyrics(lyrics_input)
+
+# Display DataFrame if lyrics are processed
+if lyrics_df is not None:
+    st.subheader("Extracted Lyric Lines")
+    st.dataframe(lyrics_df)
+    
+    # Option to download DataFrame as CSV
+    csv = lyrics_df.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        label="Download CSV",
+        data=csv,
+        file_name="lyrics.csv",
+        mime="text/csv",
+    )
+
 
 
 # Download the necessary NLTK data packages
