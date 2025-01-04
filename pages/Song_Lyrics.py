@@ -49,7 +49,7 @@ nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
 
 # Preprocess Data
-tokens = word_tokenize(" ".join(df['Lyrics'].astype(str))) # Convert the column to string type
+tokens = word_tokenize(" ".join(df['Lyrics Line"'].astype(str))) # Convert the column to string type
 english_stopwords = set(stopwords.words('english'))
 
 # Filter out stopwords, punctuation, and words starting with apostrophe
