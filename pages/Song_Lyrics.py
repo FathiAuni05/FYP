@@ -28,3 +28,72 @@ elif upload_option == "Paste Text":
         with open("pasted_lyrics.txt", "w") as f:
             f.write(lyrics)
         st.success("Lyrics saved for further analysis!")
+
+
+st.subheader("Generate Word Cloud")
+# Create a WordCloud using the downloaded font
+wordcloud = WordCloud(
+                      relative_scaling=0.3,
+                      min_font_size=1,
+                      background_color = "white",
+                      width=1024,
+                      height=768,
+                      max_words=200,
+                      colormap='plasma',
+                      scale=3,
+                      font_step=4,
+                      collocations=False,
+                      margin=5
+                      ).generate(' '.join(filtered_tokens))
+
+# Generate the WordCloud
+wordcloud.generate(text_for_wordcloud)
+
+# Display Word Cloud 🛫
+plt.figure(figsize=(12, 6))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.show()
+
+st.subheader("Generate Word Cloud: Pie Chart")
+# Create labels for the pie chart
+labels = ['Negative', 'Neutral', 'Positive']
+
+# Create sizes for each sentiment category
+sizes = [neg, neu, pos]
+
+# Plot the pie chart
+plt.figure(figsize=(8, 6))
+plt.pie(sizes, labels=labels, colors=plt.cm.Set2.colors, autopct='%1.1f%%', startangle=140)
+plt.title('Sentiment Distribution')
+plt.axis('equal')
+plt.show()
+
+st.subheader("Generate Word Cloud: Sentiment Type")
+# Generate word clouds for each sentiment type
+wordclouds = {}
+for sentiment_type in ['Positive', 'Negative', 'Neutral']:
+    words = [word[1] for word in word_sentiments if word[0] == sentiment_type]
+    if words:
+        wordcloud = WordCloud(relative_scaling=0.3,
+                              min_font_size=1,
+                              background_color="white",
+                              width=1024,
+                              height=768,
+                              max_words=500,
+                              colormap='plasma',
+                              scale=3,
+                              font_step=4,
+                              collocations=False,
+                              margin=5).generate(' '.join(words))
+        wordclouds[sentiment_type] = wordcloud
+
+# Display the word clouds
+plt.figure(figsize=(18, 6))
+for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
+    if sentiment_type in wordclouds:
+        plt.subplot(1, 3, i+1)
+        plt.imshow(wordclouds[sentiment_type], interpolation='bilinear')
+        plt.title(sentiment_type + ' Words')
+        plt.axis('off')
+plt.show()
