@@ -49,7 +49,6 @@ nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
 
 # Preprocess Data
-tokens = word_tokenize(" ".join(df['Lyrics']))
 english_stopwords = set(stopwords.words('english'))
 
 # Filter out stopwords, punctuation, and words starting with apostrophe
@@ -72,9 +71,9 @@ data = ["This is line one", "This is line two", "This is line three"]
 df = pd.DataFrame(data, columns=["Lyrics Line"])
 
 # Debugging: Inspect DataFrame structure
-print("Columns in DataFrame:", df.columns.tolist())
-print("DataFrame Preview:")
-print(df.head())
+st.write("Columns in DataFrame:", df.columns.tolist())
+st.write("DataFrame Preview:")
+st.write(df.head())
 
 # Rename column if necessary
 if "Lyrics Line" in df.columns:
@@ -82,9 +81,17 @@ if "Lyrics Line" in df.columns:
 
 # Check if the column exists
 if "Lyrics" not in df.columns:
-    print("Error: The 'Lyrics' column is missing.")
-else df.empty
-    print("Error: The DataFrame is empty!")
+    st.write("Error: The 'Lyrics' column is missing.")
+elif df.empty:
+    st.write("Error: The DataFrame is empty!")
+else:
+    # Tokenize the lyrics
+    try:
+        tokens = word_tokenize(" ".join(df['Lyrics'].astype(str)))
+       st.write("Tokens:", tokens)
+    except Exception as e:
+        st.write("An error occurred during tokenization:", str(e))
+
 
 
 
