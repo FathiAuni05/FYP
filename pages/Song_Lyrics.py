@@ -89,8 +89,6 @@ else:
         st.error(f"An error occurred during tokenization: {str(e)}")
 
 
-
-
 st.subheader("Generate Word Cloud")
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
