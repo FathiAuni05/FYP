@@ -73,7 +73,7 @@ data = ["This is line one", "This is line two", "This is line three"]
 df = pd.DataFrame(data, columns=["Lyrics Line"])
 
 # Check DataFrame structure
-print("Columns in DataFrame:", df.columns.tolist())
+st.write("Columns in DataFrame:", df.columns.tolist())
 
 # Rename column to 'lyrics' for consistency
 if "Lyrics Line" in df.columns:
@@ -81,16 +81,16 @@ if "Lyrics Line" in df.columns:
 
 # Check for missing or empty data
 if "lyrics" not in df.columns:
-    print("Error: The 'lyrics' column is missing.")
+    st.write("Error: The 'lyrics' column is missing.")
 elif df.empty:
-    print("Error: The DataFrame is empty!")
+    st.write("Error: The DataFrame is empty!")
 else:
     # Tokenization
     try:
         tokens = word_tokenize(" ".join(df['lyrics'].astype(str)))
-        print("Tokens:", tokens)
+        st.write("Tokens:", tokens)
     except Exception as e:
-        print("An error occurred during tokenization:", str(e))
+        st.write("An error occurred during tokenization:", str(e))
 
 
 st.subheader("Generate Word Cloud")
