@@ -1,4 +1,5 @@
 import streamlit as st
+from wordcloud import WordCloud
 
 # Streamlit App
 st.title("Song Lyrics Uploader")
