@@ -72,8 +72,7 @@ df = pd.DataFrame(data, columns=["Lyrics Line"])
 
 # Debugging: Inspect DataFrame structure
 st.write("Columns in DataFrame:", df.columns.tolist())
-st.write("DataFrame Preview:")
-st.write(df.head())
+st.write("DataFrame Preview:", df.head())
 
 # Rename column if necessary
 if "Lyrics Line" in df.columns:
@@ -81,16 +80,16 @@ if "Lyrics Line" in df.columns:
 
 # Check if the column exists
 if "Lyrics" not in df.columns:
-    st.write("Error: The 'Lyrics' column is missing.")
+    st.error("The 'Lyrics' column is missing.")
 elif df.empty:
-    st.write("Error: The DataFrame is empty!")
+    st.error("The DataFrame is empty!")
 else:
     # Tokenize the lyrics
     try:
         tokens = word_tokenize(" ".join(df['Lyrics'].astype(str)))
-       st.write("Tokens:", tokens)
+        st.write("Tokens:", tokens)
     except Exception as e:
-        st.write("An error occurred during tokenization:", str(e))
+        st.error(f"An error occurred during tokenization: {str(e)}")
 
 
 
