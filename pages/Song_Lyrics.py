@@ -83,15 +83,9 @@ if "Lyrics Line" in df.columns:
 # Check if the column exists
 if "Lyrics" not in df.columns:
     print("Error: The 'Lyrics' column is missing.")
-elif df.empty:
+else df.empty:
     print("Error: The DataFrame is empty!")
-else:
-    # Tokenize the lyrics
-    try:
-        tokens = word_tokenize(" ".join(df['Lyrics'].astype(str)))
-        print("Tokens:", tokens)
-    except Exception as e:
-        print("An error occurred during tokenization:", str(e))
+
 
 
 st.subheader("Generate Word Cloud")
