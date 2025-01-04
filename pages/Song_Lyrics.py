@@ -49,6 +49,7 @@ nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
 
 # Preprocess Data
+english_words = set(words.words())
 english_stopwords = set(stopwords.words('english'))
 
 # Filter out stopwords, punctuation, and words starting with apostrophe
