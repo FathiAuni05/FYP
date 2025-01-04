@@ -43,9 +43,27 @@ else:
     st.info("Please upload a file or paste lyrics to process.")
 
 
+# Download the necessary NLTK data packages
+nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
+nltk.download('words')
 
+# Preprocess Data
+tokens = word_tokenize(" ".join(df['lyrics'].astype(str))) # Convert the column to string type
+english_stopwords = set(stopwords.words('english'))
 
+# Filter out stopwords, punctuation, and words starting with apostrophe
+filtered_tokens = [word.lower() for word in tokens
+                   if word.strip()
+                   and word.lower() not in english_stopwords
+                   and wordnet.synsets(word)
+                   and len(word) > 2
+                   and word.lower() in english_words]
 
+# Join tokens into a single string
+text_for_wordcloud = ' '.join(filtered_tokens)
+
+st.write(len(filtered_tokens))
+st.write(filtered_tokens[:100])
 
 
 st.subheader("Generate Word Cloud")
