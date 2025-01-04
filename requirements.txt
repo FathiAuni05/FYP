@@ -4,3 +4,4 @@ wordcloud
 pandas
 nltk
 NRCLex
+pydub
