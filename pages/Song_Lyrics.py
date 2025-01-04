@@ -1,5 +1,6 @@
 import streamlit as st
 from wordcloud import WordCloud
+from nltk.tokenize import word_tokenize
 
 # Streamlit App
 st.title("Song Lyrics Uploader")
