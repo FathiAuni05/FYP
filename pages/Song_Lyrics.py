@@ -83,7 +83,7 @@ if "Lyrics Line" in df.columns:
 # Check if the column exists
 if "Lyrics" not in df.columns:
     print("Error: The 'Lyrics' column is missing.")
-else df.empty:
+else df.empty
     print("Error: The DataFrame is empty!")
 
 
