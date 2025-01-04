@@ -6,49 +6,42 @@ from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, words, wordnet
 
-# Title of the app
-st.title("Lyric Upload and Line Extraction")
+# Title
+st.title("Lyrics Line-by-Line Extractor")
 
-# Instructions
-st.write("Upload a `.txt` file containing song lyrics or paste lyrics below.")
+# User input options
+st.subheader("Upload a .txt file or paste song lyrics below")
 
-# File uploader
+# File upload
 uploaded_file = st.file_uploader("Upload a .txt file", type="txt")
 
-# Text area for pasting lyrics
-lyrics_input = st.text_area("Or paste the lyrics here:")
+# Text area for manual input
+lyrics_text = st.text_area("Or paste your song lyrics here (one line per line)")
 
-# Function to process lyrics
-def process_lyrics(lyrics):
-    lines = [line.strip() for line in lyrics.splitlines() if line.strip()]
-    df = pd.DataFrame(lines, columns=["Lyric Lines"])
-    return df
-
-# Initialize DataFrame
-lyrics_df = None
-
-# Handle uploaded file
-if uploaded_file:
-    lyrics_content = uploaded_file.read().decode("utf-8")
-    lyrics_df = process_lyrics(lyrics_content)
-
-# Handle pasted lyrics
-if lyrics_input:
-    lyrics_df = process_lyrics(lyrics_input)
-
-# Display DataFrame if lyrics are processed
-if lyrics_df is not None:
-    st.subheader("Extracted Lyric Lines")
-    st.dataframe(lyrics_df)
+# Process input
+if uploaded_file or lyrics_text:
+    # Extract text from uploaded file
+    if uploaded_file:
+        lyrics_text = uploaded_file.read().decode("utf-8")
     
-    # Option to download DataFrame as CSV
-    csv = lyrics_df.to_csv(index=False).encode("utf-8")
+    # Convert lyrics to DataFrame
+    lines = lyrics_text.splitlines()  # Split text into lines
+    df = pd.DataFrame(lines, columns=["Lyrics Line"])  # Create DataFrame
+
+    # Display DataFrame
+    st.subheader("Extracted Lyrics (Line by Line)")
+    st.dataframe(df)
+
+    # Option to download as CSV
     st.download_button(
-        label="Download CSV",
-        data=csv,
+        label="Download Lyrics as CSV",
+        data=df.to_csv(index=False).encode("utf-8"),
         file_name="lyrics.csv",
         mime="text/csv",
     )
+else:
+    st.info("Please upload a file or paste lyrics to process.")
+
 
 
 
