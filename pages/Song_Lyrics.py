@@ -29,7 +29,7 @@ if uploaded_file or lyrics_text:
     
     # Convert lyrics to DataFrame
     lines = lyrics_text.splitlines()  # Split text into lines
-    df = pd.DataFrame(lines, columns=["Lyrics Line"])  # Create DataFrame
+    df = pd.DataFrame(lines, columns=["lyrics"])  # Create DataFrame
 
     # Display DataFrame
     st.subheader("Extracted Lyrics (Line by Line)")
