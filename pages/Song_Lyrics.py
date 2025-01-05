@@ -10,6 +10,7 @@ import numpy as np
 from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, words, wordnet
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Title
 st.title("Lyrics Line-by-Line Extractor")
