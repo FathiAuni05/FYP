@@ -147,6 +147,41 @@ plt.title('Sentiment Distribution')
 plt.axis('equal')
 st.pyplot(plt.gcf())
 
+# Initialize list to store word sentiments
+word_sentiments = []
+
+# Initialize variables to accumulate sentiment scores
+positive_score_sum = 0
+negative_score_sum = 0
+neutral_score_sum = 0
+positive_count = 0
+negative_count = 0
+neutral_count = 0
+total_words = 0
+# Count occurrences of each sentiment and accumulate sentiment scores
+for word in filtered_tokens:
+    total_words +=1
+    sentiment_score = analyzer.polarity_scores(word)['compound']
+    if sentiment_score >= 0.05:
+        word_sentiments.append(('Positive', word))
+        positive_count += 1
+        positive_score_sum += sentiment_score
+    elif sentiment_score <= (-0.05):
+        word_sentiments.append(('Negative', word))
+        negative_count += 1
+        negative_score_sum += sentiment_score
+    else:
+        word_sentiments.append(('Neutral', word))
+        neutral_count += 1
+        neutral_score_sum += sentiment_score
+
+# Calculate average sentiment score for each emotion
+average_positive_score = positive_score_sum / positive_count if positive_count != 0 else 0
+average_negative_score = negative_score_sum / negative_count if negative_count != 0 else 0
+average_neutral_score = neutral_score_sum / neutral_count if neutral_count != 0 else 0
+average_total_score = (positive_score_sum + negative_score_sum + neutral_score_sum) / total_words
+
+
 st.subheader("Generate Word Cloud: Sentiment Type")
 # Generate word clouds for each sentiment type
 wordclouds = {}
