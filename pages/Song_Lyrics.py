@@ -1,6 +1,7 @@
 import streamlit as st
 import nltk
 nltk.download('wordnet')
+nltk.download('stopwords')
 import string
 import pandas as pd
 from wordcloud import WordCloud
