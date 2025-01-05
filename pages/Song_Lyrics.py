@@ -1,5 +1,6 @@
 import streamlit as st
 import nltk
+nltk.download('wordnet')
 import string
 import pandas as pd
 from wordcloud import WordCloud
