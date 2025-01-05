@@ -1,10 +1,12 @@
 import streamlit as st
 import nltk
+import matplotlib.pyplot as plt
 nltk.download('wordnet')
 nltk.download('vader_lexicon')
 nltk.download('stopwords')
 import string
 import pandas as pd
+import numpy as np
 from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, words, wordnet
