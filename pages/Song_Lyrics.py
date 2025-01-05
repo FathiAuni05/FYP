@@ -119,6 +119,19 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 st.pyplot(plt.gcf())
 
+# Initialize the SentimentIntensityAnalyzer
+analyzer = SentimentIntensityAnalyzer()
+
+# Calculate the sentiment scores for the entire text
+sentiment_score = analyzer.polarity_scores(text_for_wordcloud)
+
+# Extract the individual scores
+neg = sentiment_score['neg']
+neu = sentiment_score['neu']
+pos = sentiment_score['pos']
+
+sentiment_score
+
 st.subheader("Generate Word Cloud: Pie Chart")
 # Create labels for the pie chart
 labels = ['Negative', 'Neutral', 'Positive']
