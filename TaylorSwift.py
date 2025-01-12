@@ -36,7 +36,7 @@ df = pd.read_csv(text_path, encoding='latin1')
 df.head()
 
 st.title("SENTIMENY ANALYSIS IN MUSIC")
-st.header("Exploratory Data Analysis (EDA)", divider=True)
+st.header("Exploratory Data Analysis (EDA)", divider="gray")
 st.subheader("The words")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
@@ -72,7 +72,7 @@ word_counts.columns = ["Word", "Count"]
 # Display the word counts table
 word_counts.head(20).style.background_gradient(cmap='YlGn')
 
-st.subheader("The Top Frequents Words")
+st.subheader("The Top Frequents Words", divider=True)
 # Define colors using a colormap
 colors = plt.cm.YlGn(np.linspace(0.8, 0.1, len(word_counts["Word"][:15])))
 
@@ -93,8 +93,8 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 st.pyplot(plt.gcf())
 
-st.header("Generate Word Cloud")
-st.subheader("The Word Cloud")
+st.header("Generate Word Cloud", divider="gray")
+st.subheader("The Word Cloud", divider=True)
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
                       relative_scaling=0.3,
