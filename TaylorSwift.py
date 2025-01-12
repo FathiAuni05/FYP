@@ -36,7 +36,7 @@ df = pd.read_csv(text_path, encoding='latin1')
 df.head()
 
 st.title("SENTIMENY ANALYSIS IN MUSIC")
-st.header("Exploratory Data Analysis (EDA)")
+st.header("Exploratory Data Analysis (EDA)", divider=True)
 st.subheader("The words")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
