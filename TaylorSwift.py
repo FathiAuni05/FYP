@@ -230,7 +230,7 @@ df.columns = ["Word", "Count", "Pos Words", "Pos Counts", "Neg Words", "Neg Coun
 styled_df = df.head(30).style.background_gradient(cmap='YlGn')
 st.write(styled_df)
 
-st.subheader("The Sentiment Type", divider=True)
+st.subheader("The WordCloud Sentiment Type", divider=True)
 # Generate word clouds for each sentiment type
 wordclouds = {}
 for sentiment_type in ['Positive', 'Negative', 'Neutral']:
@@ -259,7 +259,7 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.axis('off')
 st.pyplot(plt.gcf())
 
-st.subheader("TheEmotion", divider=True)
+st.subheader("The Emotion", divider=True)
 text_object = NRCLex(' '.join(filtered_tokens))
 text_object.affect_frequencies
 
@@ -302,6 +302,7 @@ sentiment_cmaps = {
 # Get all unique sentiments in the text
 unique_sentiments = list(set(sentiment for emotions in text_object.affect_dict.values() for sentiment in emotions))
 
+st.subheader("The Bar Graph for Each Sentiment", divider=True)
 # Create a pandas Series from the list of filtered tokens
 word_series = pd.Series(filtered_tokens)
 
@@ -335,7 +336,8 @@ for j in range(len(unique_sentiments), num_rows * num_cols):
 plt.tight_layout()
 st.pyplot(plt.gcf())
 
-# Determine the number of rows and columns needed
+st.subheader("The WordCloud for Each Sentiment", divider=True)
+#Determine the number of rows and columns needed
 num_rows = len(unique_sentiments) // 3 + (1 if len(unique_sentiments) % 3 != 0 else 0)
 num_cols = 3
 
