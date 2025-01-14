@@ -96,7 +96,7 @@ else:
         st.error(f"An error occurred during tokenization: {str(e)}")
 
 
-st.subheader("Generate Word Cloud")
+st.subheader("Generate Word Cloud", divider="gray")
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
                       relative_scaling=0.3,
@@ -150,7 +150,6 @@ plt.title('Sentiment Distribution')
 plt.axis('equal')
 st.pyplot(plt.gcf())
 
-st.subheader("The Sentiment Scores")
 # Initialize list to store word sentiments
 word_sentiments = []
 
