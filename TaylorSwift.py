@@ -148,6 +148,7 @@ plt.title('Sentiment Distribution')
 plt.axis('equal')
 st.pyplot(plt.gcf())
 
+st.subheader("The Sentiment Scores", divider=True)
 # Initialize list to store word sentiments
 word_sentiments = []
 
@@ -176,6 +177,7 @@ for word in filtered_tokens:
         neutral_count += 1
         neutral_score_sum += sentiment_score
 
+st.subheader("The Average Sentiment Scores", divider=True)
 # Calculate average sentiment score for each emotion
 average_positive_score = positive_score_sum / positive_count if positive_count != 0 else 0
 average_negative_score = negative_score_sum / negative_count if negative_count != 0 else 0
@@ -194,6 +196,7 @@ st.write("Average neg Score: {:.2f}".format(average_negative_score))
 st.write("Average neu Score: {:.2f}".format(average_neutral_score))
 st.write("Average Total Score: {:.2f}".format(average_total_score))
 
+st.subheader("The List for Each Word Type", divider=True)
 # Create separate lists for each word type
 all_words = [word for sentiment, word in word_sentiments]
 positive_words = [word for sentiment, word in word_sentiments if sentiment == 'Positive']
@@ -227,6 +230,7 @@ df.columns = ["Word", "Count", "Pos Words", "Pos Counts", "Neg Words", "Neg Coun
 styled_df = df.head(30).style.background_gradient(cmap='YlGn')
 st.write(styled_df)
 
+st.subheader("The Sentiment Type", divider=True)
 # Generate word clouds for each sentiment type
 wordclouds = {}
 for sentiment_type in ['Positive', 'Negative', 'Neutral']:
