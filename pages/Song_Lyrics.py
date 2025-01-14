@@ -48,7 +48,8 @@ if uploaded_file or lyrics_text:
 else:
     st.info("Please upload a file or paste lyrics to process.")
 
-
+st.header("Exploratory Data Analysis (EDA)", divider="gray")
+st.subheader("The words")
 english_words = set(words.words())
 
 # Preprocess Data
