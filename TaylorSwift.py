@@ -36,6 +36,7 @@ df = pd.read_csv(text_path, encoding='latin1')
 df.head()
 
 st.title("SENTIMENY ANALYSIS IN MUSIC")
+st.header("Taylor Swift")
 st.header("Exploratory Data Analysis (EDA)", divider="gray")
 st.subheader("The words")
 # Download the necessary NLTK data packages
