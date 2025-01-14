@@ -119,6 +119,8 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 st.pyplot(plt.gcf())
 
+st.header("Sentiment Analysis", divider="gray")
+st.subheader("Individual score", divider=True)
 # Initialize the SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
@@ -132,6 +134,7 @@ pos = sentiment_score['pos']
 
 sentiment_score
 
+st.subheader("Pie Chart Sentiment Distribution", divider=True)
 # Create labels for the pie chart
 labels = ['Negative', 'Neutral', 'Positive']
 
