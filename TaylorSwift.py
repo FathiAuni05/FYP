@@ -177,7 +177,6 @@ for word in filtered_tokens:
         neutral_count += 1
         neutral_score_sum += sentiment_score
 
-st.subheader("The Average Sentiment Scores", divider=True)
 # Calculate average sentiment score for each emotion
 average_positive_score = positive_score_sum / positive_count if positive_count != 0 else 0
 average_negative_score = negative_score_sum / negative_count if negative_count != 0 else 0
@@ -190,6 +189,7 @@ st.write("neg:", negative_count)
 st.write("neu:", neutral_count)
 st.write("Total:", total_words)
 
+st.subheader("The Average Sentiment Scores", divider=True)
 # Print results with two decimal places
 st.write("Average pos Score: {:.2f}".format(average_positive_score))
 st.write("Average neg Score: {:.2f}".format(average_negative_score))
@@ -259,15 +259,14 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.axis('off')
 st.pyplot(plt.gcf())
 
-
-
-
-
+st.subheader("TheEmotion", divider=True)
 text_object = NRCLex(' '.join(filtered_tokens))
 text_object.affect_frequencies
 
+st.subheader("The Top Emotion Sentiment", divider=True)
 text_object.top_emotions
 
+st.subheader("The Total Number of Words", divider=True)
 # Get the total number of words
 total_words = len(text_object.words)
 st.write("Total words in the text:", total_words)
@@ -276,6 +275,7 @@ sentiment_scores = pd.DataFrame(list(text_object.raw_emotion_scores.items()))
 sentiment_scores = sentiment_scores.rename(columns={0: "Sentiment", 1: "Count"})
 sentiment_scores.style.background_gradient(cmap='YlGn')
 
+st.subheader("Pie Chart for Sentiment Emotion", divider=True)
 # Plot the pie chart
 plt.figure(figsize=(8, 6))
 plt.pie(sentiment_scores['Count'], labels=sentiment_scores['Sentiment'], colors=plt.cm.tab20c.colors, autopct='%1.1f%%', startangle=140)
