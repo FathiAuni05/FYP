@@ -121,6 +121,8 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 st.pyplot(plt.gcf())
 
+st.header("Sentiment Analysis", divider="gray")
+st.subheader("Individual score")
 # Initialize the SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
@@ -134,7 +136,7 @@ pos = sentiment_score['pos']
 
 sentiment_score
 
-st.subheader("Generate Word Cloud: Pie Chart")
+st.subheader("Pie Chart Sentiment Distribution")
 # Create labels for the pie chart
 labels = ['Negative', 'Neutral', 'Positive']
 
@@ -148,6 +150,7 @@ plt.title('Sentiment Distribution')
 plt.axis('equal')
 st.pyplot(plt.gcf())
 
+st.subheader("The Sentiment Scores")
 # Initialize list to store word sentiments
 word_sentiments = []
 
@@ -183,7 +186,7 @@ average_neutral_score = neutral_score_sum / neutral_count if neutral_count != 0 
 average_total_score = (positive_score_sum + negative_score_sum + neutral_score_sum) / total_words
 
 
-st.subheader("Generate Word Cloud: Sentiment Type")
+st.subheader("The WordCloud Sentiment Type")
 # Generate word clouds for each sentiment type
 wordclouds = {}
 for sentiment_type in ['Positive', 'Negative', 'Neutral']:
