@@ -15,12 +15,9 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 tab1, tab2 = st.tabs(["Text", "Audio"])
 
 with tab1:
-    st.title("Upload Lyrics or Text Lyrics")
+    st.title("Lyrics Line-by-Line Extracter")
 with tab2:
     st.title("Audio to Text Coverter")
-
-# Title
-st.title("Lyrics Line-by-Line Extractor")
 
 # User input options
 st.subheader("Upload a .txt file or paste song lyrics below")
