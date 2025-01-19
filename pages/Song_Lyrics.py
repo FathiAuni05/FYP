@@ -18,7 +18,8 @@ tab1, tab2 = st.tabs(["Text", "Audio"])
 
 with tab1:
     st.title("Lyrics Line-by-Line Extracter")
-
+with tab2:
+    st.title("Audio to Text Coverter")
 
 # User input options
 st.subheader("Upload a .txt file or paste song lyrics below")
@@ -218,63 +219,3 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.title(sentiment_type + ' Words')
         plt.axis('off')
 st.pyplot(plt.gcf())
-
-with tab2:
-    st.title("Audio to Text Coverter")
-
-pip install streamlit SpeechRecognition pandas
-
-# Function to convert audio to text
-def audio_to_text(audio_file):
-    recognizer = sr.Recognizer()
-    try:
-        with sr.AudioFile(audio_file) as source:
-            audio_data = recognizer.record(source)
-            text = recognizer.recognize_google(audio_data)
-            return text
-    except Exception as e:
-        return f"Error: {str(e)}"
-
-# Function to convert text into a DataFrame
-def text_to_dataframe(text):
-    lines = text.splitlines()  # Split the text into lines
-    data = {"Line": lines}
-    df = pd.DataFrame(data)
-    return df
-
-# Streamlit app
-st.title("Audio to Text Converter")
-st.write("Upload an audio file to convert it to text and view the lines in DataFrame format.")
-
-# File uploader
-uploaded_file = st.file_uploader("Choose an audio file", type=["wav", "mp3"])
-
-if uploaded_file is not None:
-    st.audio(uploaded_file, format="audio/wav")  # Play the uploaded audio file
-
-    # Convert audio file to a readable format for SpeechRecognition
-    audio_bytes = BytesIO(uploaded_file.read())
-    
-    # Process the uploaded audio file
-    st.write("Processing the audio file...")
-    text_result = audio_to_text(audio_bytes)
-    
-    if text_result.startswith("Error:"):
-        st.error(text_result)
-    else:
-        st.success("Audio converted to text successfully!")
-        
-        # Convert text to DataFrame
-        df = text_to_dataframe(text_result)
-        st.write("Extracted Lines:")
-        st.dataframe(df)
-
-        # Allow downloading the DataFrame as a CSV
-        csv = df.to_csv(index=False)
-        st.download_button(
-            label="Download as CSV",
-            data=csv,
-            file_name="extracted_lines.csv",
-            mime="text/csv",
-        )
-
