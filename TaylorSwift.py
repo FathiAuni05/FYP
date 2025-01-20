@@ -72,7 +72,7 @@ word_counts.columns = ["Word", "Count"]
 # Display the word counts table
 word_counts.head(20).style.background_gradient(cmap='YlGn')
 
-st.subheader("The Top Frequents Words", divider=True)
+st.subheader("The Top Frequents Words")
 # Define colors using a colormap
 colors = plt.cm.YlGn(np.linspace(0.8, 0.1, len(word_counts["Word"][:15])))
 
