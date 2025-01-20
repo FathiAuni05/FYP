@@ -35,8 +35,7 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
-st.title("SENTIMENY ANALYSIS IN MUSIC")
-st.header("Taylor Swift")
+st.title("SENTIMENY ANALYSIS IN MUSIC - Taylor Swift")
 st.header("Exploratory Data Analysis (EDA)", divider="gray")
 st.subheader("The words")
 # Download the necessary NLTK data packages
@@ -95,7 +94,7 @@ plt.tight_layout()
 st.pyplot(plt.gcf())
 
 st.header("Generate Word Cloud", divider="gray")
-st.subheader("The Word Cloud", divider=True)
+st.subheader("The Word Cloud")
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
                       relative_scaling=0.3,
