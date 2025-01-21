@@ -41,6 +41,7 @@ st.subheader("The words")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
+nltk.download('punkt')
 
 english_words = set(words.words())
 
