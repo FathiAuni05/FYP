@@ -45,7 +45,7 @@ nltk.download('words')
 english_words = set(words.words())
 
 # Preprocess Data
-tokens = word_tokenize(" ".join(df['Lyric']))
+tokens = word_tokenize(" ".join(df['lyric']))
 english_stopwords = set(stopwords.words('english'))
 
 # Filter out stopwords, punctuation, and words starting with apostrophe
