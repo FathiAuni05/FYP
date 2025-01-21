@@ -302,6 +302,7 @@ sentiment_cmaps = {
 # Get all unique sentiments in the text
 unique_sentiments = list(set(sentiment for emotions in text_object.affect_dict.values() for sentiment in emotions))
 
+st.subheader("The Bar Graph for Each Sentiment")
 # Create a pandas Series from the list of filtered tokens
 word_series = pd.Series(filtered_tokens)
 
