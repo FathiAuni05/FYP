@@ -7,7 +7,6 @@ nltk.download('stopwords')
 import string
 import pandas as pd
 import numpy as np
-import speech_recognition as sr
 from io import BytesIO
 from wordcloud import WordCloud
 from nltk.tokenize import word_tokenize
