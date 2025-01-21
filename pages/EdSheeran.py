@@ -41,11 +41,12 @@ st.subheader("The words")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
+nltk.download('punkt')
 
 english_words = set(words.words())
 
 # Preprocess Data
-tokens = word_tokenize(" ".join(df['Lyric']))
+tokens = word_tokenize(" ".join(df['Lyric'].dropna()))  # Drop NaN values if any
 english_stopwords = set(stopwords.words('english'))
 
 # Filter out stopwords, punctuation, and words starting with apostrophe
