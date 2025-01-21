@@ -35,11 +35,13 @@ df = pd.read_csv(text_path, encoding='latin1')
 
 df.head()
 
+st.title("SENTIMENY ANALYSIS IN MUSIC - All Song")
+st.header("Exploratory Data Analysis (EDA)", divider="gray")
+st.subheader("The words")
 # Download the necessary NLTK data packages
 nltk.download('punkt_tab') # Download the Punkt Tokenizer Models
 nltk.download('words')
 
-st.header("Exploratory Data Analysis (EDA)", divider="gray")
 english_words = set(words.words())
 
 # Preprocess Data
@@ -70,6 +72,7 @@ word_counts.columns = ["Word", "Count"]
 # Display the word counts table
 word_counts.head(20).style.background_gradient(cmap='YlGn')
 
+st.subheader("The Top Frequents Words")
 # Define colors using a colormap
 colors = plt.cm.YlGn(np.linspace(0.8, 0.1, len(word_counts["Word"][:15])))
 
@@ -90,6 +93,8 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 st.pyplot(plt.gcf())
 
+st.header("Generate Word Cloud", divider="gray")
+st.subheader("The Word Cloud")
 # Create a WordCloud using the downloaded font
 wordcloud = WordCloud(
                       relative_scaling=0.3,
@@ -114,6 +119,8 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 st.pyplot(plt.gcf())
 
+st.header("Sentiment Analysis", divider="gray")
+st.subheader("Individual score")
 # Initialize the SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
@@ -127,6 +134,7 @@ pos = sentiment_score['pos']
 
 sentiment_score
 
+st.subheader("Pie Chart Sentiment Distribution")
 # Create labels for the pie chart
 labels = ['Negative', 'Neutral', 'Positive']
 
@@ -140,6 +148,7 @@ plt.title('Sentiment Distribution')
 plt.axis('equal')
 st.pyplot(plt.gcf())
 
+st.subheader("The Sentiment Scores")
 # Initialize list to store word sentiments
 word_sentiments = []
 
@@ -180,12 +189,14 @@ st.write("neg:", negative_count)
 st.write("neu:", neutral_count)
 st.write("Total:", total_words)
 
+st.subheader("The Average Sentiment Scores")
 # Print results with two decimal places
 st.write("Average pos Score: {:.2f}".format(average_positive_score))
 st.write("Average neg Score: {:.2f}".format(average_negative_score))
 st.write("Average neu Score: {:.2f}".format(average_neutral_score))
 st.write("Average Total Score: {:.2f}".format(average_total_score))
 
+st.subheader("The List for Each Word Type")
 # Create separate lists for each word type
 all_words = [word for sentiment, word in word_sentiments]
 positive_words = [word for sentiment, word in word_sentiments if sentiment == 'Positive']
@@ -219,6 +230,7 @@ df.columns = ["Word", "Count", "Pos Words", "Pos Counts", "Neg Words", "Neg Coun
 styled_df = df.head(30).style.background_gradient(cmap='YlGn')
 st.write(styled_df)
 
+st.subheader("The WordCloud Sentiment Type")
 # Generate word clouds for each sentiment type
 wordclouds = {}
 for sentiment_type in ['Positive', 'Negative', 'Neutral']:
@@ -247,15 +259,14 @@ for i, sentiment_type in enumerate(['Positive', 'Negative', 'Neutral']):
         plt.axis('off')
 st.pyplot(plt.gcf())
 
-
-
-
-
+st.subheader("The Emotion")
 text_object = NRCLex(' '.join(filtered_tokens))
 text_object.affect_frequencies
 
+st.subheader("The Top Emotion Sentiment")
 text_object.top_emotions
 
+st.subheader("The Total Number of Words")
 # Get the total number of words
 total_words = len(text_object.words)
 st.write("Total words in the text:", total_words)
@@ -264,6 +275,7 @@ sentiment_scores = pd.DataFrame(list(text_object.raw_emotion_scores.items()))
 sentiment_scores = sentiment_scores.rename(columns={0: "Sentiment", 1: "Count"})
 sentiment_scores.style.background_gradient(cmap='YlGn')
 
+st.subheader("Pie Chart for Sentiment Emotion")
 # Plot the pie chart
 plt.figure(figsize=(8, 6))
 plt.pie(sentiment_scores['Count'], labels=sentiment_scores['Sentiment'], colors=plt.cm.tab20c.colors, autopct='%1.1f%%', startangle=140)
@@ -290,6 +302,7 @@ sentiment_cmaps = {
 # Get all unique sentiments in the text
 unique_sentiments = list(set(sentiment for emotions in text_object.affect_dict.values() for sentiment in emotions))
 
+st.subheader("The Bar Graph for Each Sentiment")
 # Create a pandas Series from the list of filtered tokens
 word_series = pd.Series(filtered_tokens)
 
@@ -323,6 +336,7 @@ for j in range(len(unique_sentiments), num_rows * num_cols):
 plt.tight_layout()
 st.pyplot(plt.gcf())
 
+st.subheader("The WordCloud for Each Sentiment")
 # Determine the number of rows and columns needed
 num_rows = len(unique_sentiments) // 3 + (1 if len(unique_sentiments) % 3 != 0 else 0)
 num_cols = 3
