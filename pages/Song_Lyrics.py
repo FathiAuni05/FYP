@@ -13,12 +13,12 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, words, wordnet
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-tab1, tab2 = st.tabs(["Text", "Audio"])
+tab1, tab2 = st.tabs(["Text📄", "Audio🎧"])
 
 with tab1:
-    st.title("Lyrics Line-by-Line Extracter")
+    st.title("Lyrics Line-by-Line Extracter🎵🎶")
 with tab2:
-    st.title("Audio to Text Coverter")
+    st.title("Audio to Text Coverter🎼")
 
 # User input options
 st.subheader("Upload a .txt file or paste song lyrics below")
