@@ -337,7 +337,7 @@ plt.tight_layout()
 st.pyplot(plt.gcf())
 
 st.subheader("The WordCloud for Each Sentiment")
-# Determine the number of rows and columns needed
+#Determine the number of rows and columns needed
 num_rows = len(unique_sentiments) // 3 + (1 if len(unique_sentiments) % 3 != 0 else 0)
 num_cols = 3
 
